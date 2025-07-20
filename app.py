@@ -57,7 +57,9 @@ def list_logs():
 def upload_log():
     try:
         data = request.get_json()
-        filename = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        # Updated filename format: session_log_2025-07-20T18-21-45.981302.json
+        timestamp = datetime.now().isoformat().replace(":", "-")
+        filename = f"session_log_{timestamp}.json"
         filepath = os.path.join(LOG_DIR, filename)
         with open(filepath, 'w') as f:
             json.dump(data, f, indent=2)
